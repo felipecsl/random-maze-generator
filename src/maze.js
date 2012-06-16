@@ -5,6 +5,9 @@ var Maze = function(doc, elemId) {
   this.ctx = this.canvas.getContext('2d');
   this.horizCells = 20;
   this.vertCells = 20;
+  this.generator = new MazeGenerator(this.horizCells, this.vertCells);
+  this.cellWidth = this.width / this.horizCells;
+  this.cellHeight = this.height / this.vertCells;
   
   var self = this;
 
@@ -18,7 +21,7 @@ var Maze = function(doc, elemId) {
     },
 
     draw: function() {
-      this.drawGrid();
+      //this.drawGrid();
       this.drawMaze();
     },
 
@@ -43,22 +46,51 @@ var Maze = function(doc, elemId) {
     },
 
     drawMaze: function() {
-      var totalVisited = 1;
-      var cell = new Cell(0, 0);
-      var mazeGraph = new MazeGraph(self.horizCells, self.vertCells);
+      self.generator.generate();
+      var graph = self.generator.graph;
+      self.ctx.strokeStyle = '#000';
 
-      cell.visit();
+      for(var i = 0; i < graph.width; i++) {
+        for(var j = 0; j < graph.height; j++) {
+          var cell = graph.cells[i][j];
 
-      // while(totalVisited < self.horizCells * self.vertCells) {
-      //     if(!cell.visited) {
-
-      //     }
-      // };
+          if(cell.walls.top) {
+            var x1 = cell.x * self.cellWidth;
+            var y1 = cell.y * self.cellHeight;
+            var x2 = x1 + self.cellWidth;
+            var y2 = y1;
+            
+            this.drawLine(x1, y1, x2, y2);
+          }
+          if(cell.walls.left) {
+            var x2 = x1;
+            var y2 = y1 + self.cellHeight;
+            
+            this.drawLine(x1, y1, x2, y2);
+          }          
+          if(cell.walls.right) {
+            var x1 = (cell.x * self.cellWidth) + self.cellWidth;
+            var y1 = cell.y * self.cellHeight;
+            var x2 = x1;
+            var y2 = y1 + self.cellHeight;
+            
+            this.drawLine(x1, y1, x2, y2);
+          }
+          if(cell.walls.bottom) {
+            var x1 = cell.x * self.cellWidth;
+            var y1 = (cell.y * self.cellHeight) + self.cellHeight;
+            var x2 = x1 + self.cellWidth;
+            var y2 = y1;
+            
+            this.drawLine(x1, y1, x2, y2);
+          }
+        }
+      }
     },
 
     drawLine: function(x1, y1, x2, y2) {
       self.ctx.beginPath();
-      self.ctx.moveTo(x1, y1);  
+      self.ctx.moveTo(x1, y1);
       self.ctx.lineTo(x2, y2);
       self.ctx.stroke();
     }

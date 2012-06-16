@@ -25,15 +25,20 @@
     <canvas id="maze" width="600" height="600"></canvas>
 
     <script src="lib/jquery.min.js"></script>
+    <script src="lib/underscore-min.js"></script>
     <script src="lib/jasmine-1.2.0/jasmine.js"></script>
     <script src="lib/jasmine-1.2.0/jasmine-html.js"></script>    
     <script src="src/cell.js"></script>
-    <script src="src/mazeGraph.js"></script>
+    <script src="src/cellWalls.js"></script>
+    <script src="src/mazeGenerator.js"></script>
+    <script src="src/graph.js"></script>
     <script src="src/maze.js"></script>
 
+    <script src="spec/cellWallsSpec.js"></script>
     <script src="spec/cellSpec.js"></script>
     <script src="spec/mazeSpec.js"></script>
-    <script src="spec/mazeGraphSpec.js"></script>
+    <script src="spec/mazeGeneratorSpec.js"></script>
+    <script src="spec/graphSpec.js"></script>
     <script>
         new Maze(document, 'maze').draw();
     

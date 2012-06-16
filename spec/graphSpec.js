@@ -1,8 +1,8 @@
-describe("MazeGraph", function() {
+describe("Graph", function() {
   var graph;
 
   beforeEach(function() {
-    graph = new MazeGraph(30, 30);
+    graph = new Graph(30, 30);
   });
 
   describe('initialization', function() {
@@ -44,37 +44,6 @@ describe("MazeGraph", function() {
     it("should not return a cell at negative y", function() {
       cell = graph.getCellAt(20, -1);
       expect(cell).toBeNull();
-    });
-  });
-  
-  describe('getCellUnvisitedNeighbors', function () {
-    it('should return all 8 cell neighbors', function() {
-      neighbors = graph.getCellUnvisitedNeighbors(new Cell(10, 10));
-
-      expect(neighbors[0].x).toEqual(9);
-      expect(neighbors[0].y).toEqual(9);
-      expect(neighbors[1].x).toEqual(10);
-      expect(neighbors[1].y).toEqual(9);
-      expect(neighbors[2].x).toEqual(11);
-      expect(neighbors[2].y).toEqual(9);
-      expect(neighbors[3].x).toEqual(9);
-      expect(neighbors[3].y).toEqual(10);
-      expect(neighbors[4].x).toEqual(11);
-      expect(neighbors[4].y).toEqual(10);
-      expect(neighbors[5].x).toEqual(9);
-      expect(neighbors[5].y).toEqual(9);
-      expect(neighbors[6].x).toEqual(10);
-      expect(neighbors[6].y).toEqual(11);
-      expect(neighbors[7].x).toEqual(11);
-      expect(neighbors[7].y).toEqual(11);
-    });
-
-    it('should not return visited neighbors', function() {
-      
-    });
-
-    it('should not return unexisting/null cells', function() {
-      
     });
   });
 });

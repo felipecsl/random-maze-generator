@@ -54,7 +54,7 @@ var Maze = function(doc, elemId) {
         for(var j = 0; j < graph.height; j++) {
           var cell = graph.cells[i][j];
 
-          if(cell.walls.top) {
+          if(graph.areConnected(cell, graph.getCellAt(cell.x, cell.y - 1))) {
             var x1 = cell.x * self.cellWidth;
             var y1 = cell.y * self.cellHeight;
             var x2 = x1 + self.cellWidth;
@@ -62,13 +62,13 @@ var Maze = function(doc, elemId) {
             
             this.drawLine(x1, y1, x2, y2);
           }
-          if(cell.walls.left) {
+          if(graph.areConnected(cell, graph.getCellAt(cell.x - 1, cell.y))) {
             var x2 = x1;
             var y2 = y1 + self.cellHeight;
             
             this.drawLine(x1, y1, x2, y2);
           }          
-          if(cell.walls.right) {
+          if(graph.areConnected(cell, graph.getCellAt(cell.x + 1, cell.y))) {
             var x1 = (cell.x * self.cellWidth) + self.cellWidth;
             var y1 = cell.y * self.cellHeight;
             var x2 = x1;
@@ -76,7 +76,7 @@ var Maze = function(doc, elemId) {
             
             this.drawLine(x1, y1, x2, y2);
           }
-          if(cell.walls.bottom) {
+          if(graph.areConnected(cell, graph.getCellAt(cell.x, cell.y + 1))) {
             var x1 = cell.x * self.cellWidth;
             var y1 = (cell.y * self.cellHeight) + self.cellHeight;
             var x2 = x1 + self.cellWidth;

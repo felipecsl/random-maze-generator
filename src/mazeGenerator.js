@@ -6,11 +6,11 @@ var MazeGenerator = function(rows, cols) {
 
 	var recurse = function(cell) {
 		cell.visit();
-    var neighbors = cell.unvisitedNeighbors();
+    var neighbors = self.graph.cellUnvisitedNeighbors(cell);
     if(neighbors.length > 0) {
     	var randomNeighbor = neighbors[Math.floor(Math.random() * neighbors.length)];
     	self.cellStack.push(cell);
-    	cell.removeWallTo(randomNeighbor);
+    	self.graph.removeEdgeBetween(cell, randomNeighbor);
     	recurse(randomNeighbor);
     }
     else {

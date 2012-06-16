@@ -46,4 +46,61 @@ describe("Graph", function() {
       expect(cell).toBeNull();
     });
   });
+
+  describe('cellUnvisitedNeighbors', function() {
+    it('should not return visited neighbors', function() {
+      graph.getCellAt(2, 3).visit();
+      
+      var neighbors = graph.cellUnvisitedNeighbors(graph.getCellAt(2, 2));
+      expect(neighbors.length).toEqual(3);
+    });
+  });
+
+  describe('areConnected', function() {
+    it('should return true', function() {
+      var cell1 = graph.getCellAt(3, 5);
+      var cell2 = graph.getCellAt(3, 6);
+      expect(graph.areConnected(cell1, cell2)).toBeTruthy();
+    });
+
+    it('should return false', function() {
+      var cell1 = graph.getCellAt(2, 2);
+      var cell2 = graph.getCellAt(12, 3);
+      expect(graph.areConnected(cell1, cell2)).toBeFalsy();
+    });
+  });
+
+  describe('removeEdgeBetween', function() {
+    it('should remove wall to neighbor on the top', function() { 
+      var cell1 = graph.getCellAt(2, 2);
+      var cell2 = graph.getCellAt(2, 1);
+      expect(graph.areConnected(cell1, cell2)).toBeTruthy();
+      graph.removeEdgeBetween(cell1, cell2);
+      expect(graph.areConnected(cell1, cell2)).toBeFalsy();
+    });
+
+    it('should remove wall to neighbor on the right', function() { 
+      var cell1 = graph.getCellAt(2, 2);
+      var cell2 = graph.getCellAt(3, 2);
+      expect(graph.areConnected(cell1, cell2)).toBeTruthy();
+      graph.removeEdgeBetween(cell1, cell2);
+      expect(graph.areConnected(cell1, cell2)).toBeFalsy();
+    });
+
+    it('should remove wall to neighbor on the bottom', function() { 
+      var cell1 = graph.getCellAt(2, 2);
+      var cell2 = graph.getCellAt(2, 3);
+      expect(graph.areConnected(cell1, cell2)).toBeTruthy();
+      graph.removeEdgeBetween(cell1, cell2);
+      expect(graph.areConnected(cell1, cell2)).toBeFalsy();
+    });
+
+    it('should remove wall to neighbor on the left', function() { 
+      var cell1 = graph.getCellAt(2, 2);
+      var cell2 = graph.getCellAt(1, 2);
+      expect(graph.areConnected(cell1, cell2)).toBeTruthy();
+      graph.removeEdgeBetween(cell1, cell2);
+      expect(graph.areConnected(cell1, cell2)).toBeFalsy();
+    });
+  });
 });

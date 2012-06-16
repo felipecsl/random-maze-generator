@@ -11,6 +11,8 @@ var Maze = function(doc, elemId) {
   
   var self = this;
 
+  self.ctx.strokeStyle = '#000';
+
   return {
     width: function() {
       return self.width;
@@ -21,34 +23,20 @@ var Maze = function(doc, elemId) {
     },
 
     draw: function() {
-      //this.drawGrid();
+      this.drawBorders();
       this.drawMaze();
     },
 
-    drawGrid: function() {
-      var posX = 0;
-      var posY = 0;
-      var incrX = self.width / self.horizCells;
-      var incrY = self.height / self.vertCells;
-
-      self.ctx.lineWidth = 1;
-      self.ctx.strokeStyle = '#ddd';
-
-      do {
-          posX += incrX;
-          this.drawLine(posX, 0, posX, self.height);
-      } while(posX < self.width);
-
-      do {
-          posY += incrY;
-          this.drawLine(0, posY, self.width, posY);
-      } while(posY < self.height);
+    drawBorders: function() {
+      this.drawLine(self.cellWidth, 0, self.width, 0);
+      this.drawLine(self.width, 0, self.width, self.height);
+      this.drawLine(self.width, self.height, 0, self.height);
+      this.drawLine(0, self.height, 0, 0);
     },
 
     drawMaze: function() {
       self.generator.generate();
       var graph = self.generator.graph;
-      self.ctx.strokeStyle = '#000';
 
       for(var i = 0; i < graph.width; i++) {
         for(var j = 0; j < graph.height; j++) {

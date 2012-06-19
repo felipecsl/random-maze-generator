@@ -22,16 +22,46 @@
     <meta name="viewport" content="width=device-width">
 </head>
 <body>
-    <canvas id="maze" width="600" height="600"></canvas>
-
     <script src="lib/jquery.min.js"></script>
     <script src="lib/underscore-min.js"></script>
+    <script src="lib/jasmine-1.2.0/jasmine.js"></script>
+    <script src="lib/jasmine-1.2.0/jasmine-html.js"></script>    
     <script src="src/cell.js"></script>
     <script src="src/mazeGenerator.js"></script>
     <script src="src/graph.js"></script>
     <script src="src/maze.js"></script>
+
+    <script src="spec/cellSpec.js"></script>
+    <script src="spec/mazeSpec.js"></script>
+    <script src="spec/mazeGeneratorSpec.js"></script>
+    <script src="spec/graphSpec.js"></script>
     <script>
-        new Maze(document, 'maze').draw();
+        (function() {
+          var jasmineEnv = jasmine.getEnv();
+          jasmineEnv.updateInterval = 1000;
+
+          var htmlReporter = new jasmine.HtmlReporter();
+
+          jasmineEnv.addReporter(htmlReporter);
+
+          jasmineEnv.specFilter = function(spec) {
+            return htmlReporter.specFilter(spec);
+          };
+
+          var currentWindowOnload = window.onload;
+
+          window.onload = function() {
+            if (currentWindowOnload) {
+              currentWindowOnload();
+            }
+            execJasmine();
+          };
+
+          function execJasmine() {
+            jasmineEnv.execute();
+          }
+
+        })();
     </script>
 </body>
 </html>

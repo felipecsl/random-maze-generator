@@ -8,4 +8,6 @@ Please feel free to fork and make comments/suggestions! Thanks!
 
 ## Screenshot
 
-![screenshot](https://raw.github.com/felipecsl/random-maze-generator/master/maze.png)
+![maze](https://raw.github.com/felipecsl/random-maze-generator/master/maze.png)
+
+![specs](https://raw.github.com/felipecsl/random-maze-generator/master/specs.png)

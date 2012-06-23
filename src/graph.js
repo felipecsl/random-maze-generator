@@ -4,6 +4,8 @@ var Graph = function(width, height) {
   this.cells = [];
   this.removedEdges = [];
 
+  var self = this;
+
   this.getCellAt = function (x, y) {
     if(x >= this.width || y >= this.height || x < 0 || y < 0) {
     	return null;
@@ -20,6 +22,7 @@ var Graph = function(width, height) {
     return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
   },
 
+  // Returns true if there is an edge between cell1 and cell2
   this.areConnected = function(cell1, cell2) {
   	if(!cell1 || !cell2) {
   		return false;
@@ -37,45 +40,49 @@ var Graph = function(width, height) {
   };
 
   this.cellUnvisitedNeighbors = function(cell) {
-  	return _.select(this.cellNeighbors(cell), function(c) {
+  	return _.select(this.cellConnectedNeighbors(cell), function(c) {
       return !c.visited;
     });
   };
 
-  this.cellNeighbors = function(cell) {
+  // Returns all neighbors of this cell that ARE separated by an edge (maze line)
+  this.cellConnectedNeighbors = function(cell) {
+    return _.select(this.cellNeighbors(cell), function(c) {
+      return self.areConnected(cell, c);
+    });
+  };
+
+  // Returns all neighbors of this cell that are NOT separated by an edge
+  // This means there is a maze path between both cells.
+  this.cellDisconnectedNeighbors = function (cell) {
+    return _.reject(this.cellNeighbors(cell), function(c) {
+      return self.areConnected(cell, c);
+    });
+  }
+
+  // Returns all neighbors of this cell, regardless if they are connected or not.
+  this.cellNeighbors = function (cell) {
     var neighbors = [];
+    var topCell = this.getCellAt(cell.x, cell.y - 1);
+    var rightCell = this.getCellAt(cell.x + 1, cell.y);
+    var bottomCell = this.getCellAt(cell.x, cell.y + 1);
+    var leftCell = this.getCellAt(cell.x - 1, cell.y);
 
-    if(cell.y > 0) {
-      var topCell = this.getCellAt(cell.x, cell.y - 1);
-
-      if(topCell && this.areConnected(cell, topCell)) {
-        neighbors.push(topCell);
-      }
+    if(cell.y > 0 && topCell) {
+      neighbors.push(topCell);
     }
-    if(cell.x < this.width) {
-      var rightCell = this.getCellAt(cell.x + 1, cell.y);
-
-      if(rightCell && this.areConnected(cell, rightCell)) {
-        neighbors.push(rightCell);
-      }
+    if(cell.x < this.width && rightCell) {
+      neighbors.push(rightCell);
     }
-    if(cell.y < this.height) {
-      var bottomCell = this.getCellAt(cell.x, cell.y + 1);
-
-      if(bottomCell && this.areConnected(cell, bottomCell)) {
-        neighbors.push(bottomCell);
-      }
+    if(cell.y < this.height && bottomCell) {
+      neighbors.push(bottomCell);
     }
-    if(cell.x > 0) {
-      var leftCell = this.getCellAt(cell.x - 1, cell.y);
-
-      if(leftCell && this.areConnected(cell, leftCell)) {
-        neighbors.push(leftCell);
-      }
+    if(cell.x > 0 && leftCell) {
+      neighbors.push(leftCell);
     }
 
     return neighbors;
-  };
+  }
 
   this.removeEdgeBetween = function(cell1, cell2) {
   	this.removedEdges.push([cell1, cell2]);

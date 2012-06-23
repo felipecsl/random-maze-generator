@@ -3,15 +3,16 @@ var Maze = function(doc, elemId) {
   this.width = this.canvas.width;
   this.height = this.canvas.height;
   this.ctx = this.canvas.getContext('2d');
-  this.horizCells = 30;
-  this.vertCells = 30;
+  this.horizCells = 20;
+  this.vertCells = 20;
   this.generator = new MazeGenerator(this.horizCells, this.vertCells);
   this.cellWidth = this.width / this.horizCells;
   this.cellHeight = this.height / this.vertCells;
   
   var self = this;
 
-  self.ctx.strokeStyle = '"rgba(0,0,0,0)"';
+  self.ctx.strokeStyle = "rgb(0, 0, 0)";
+  self.ctx.fillStyle = "rgba(255, 0, 0, 0.1)";
 
   return {
     width: function() {
@@ -33,6 +34,7 @@ var Maze = function(doc, elemId) {
 
     solve: function() {
       self.generator.solve();
+      this.drawSolution();
     },
 
     drawBorders: function() {
@@ -40,6 +42,21 @@ var Maze = function(doc, elemId) {
       this.drawLine(self.width, 0, self.width, self.height);
       this.drawLine(self.width - self.cellWidth, self.height, 0, self.height);
       this.drawLine(0, self.height, 0, 0);
+    },
+
+    drawSolution: function() {
+      var path = self.generator.path;
+      
+      for(var i = 0; i < path.length; i++) {
+        (function () {
+          var cell = path[i];
+          var x = cell.x * self.cellWidth;
+          var y = cell.y * self.cellHeight;
+          setTimeout(function() {
+            self.ctx.fillRect(x, y, self.cellWidth, self.cellHeight);
+          }, 80 * i);
+        })();
+      }
     },
 
     drawMaze: function() {

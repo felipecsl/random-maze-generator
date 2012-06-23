@@ -7,11 +7,33 @@ var Cell = function(x, y) {
   // the previous node in the navigated path.
   this.parent = null;
 
+  this.heuristic = 0;
+
   this.visit = function () {
     this.visited = true;
   };
 
   this.score = function () {
-  	return 0;
+  	var total = 0;
+  	var p = this.parent;
+  	
+  	while(p) {
+  		++total;
+  		p = p.parent;
+  	}
+  	return total;
+  };
+
+  this.pathToOrigin = function () {
+  	var path = [this];
+  	var p = this.parent;
+  	
+  	while(p) {
+  		path.push(p);
+  		p = p.parent;
+  	}
+  	path.reverse();
+  	
+  	return path;
   };
 };

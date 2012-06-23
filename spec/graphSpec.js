@@ -69,9 +69,9 @@ describe("Graph", function() {
     });
   });
 
-  describe('cellNeighbors', function() {
+  describe('cellConnectedNeighbors', function() {
     it('should return cell neighbors', function() {
-      var neighbors = graph.cellNeighbors(graph.getCellAt(2, 3));
+      var neighbors = graph.cellConnectedNeighbors(graph.getCellAt(2, 3));
       
       expect(neighbors.length).toEqual(4);
       expect(neighbors[0]).toEqual(graph.getCellAt(2, 2));

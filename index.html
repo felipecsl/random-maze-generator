@@ -24,6 +24,8 @@
 <body>
     <canvas id="maze" width="600" height="600"></canvas>
 
+    <input type="submit" value="Solve Maze" id="solve"></input>
+
     <script src="lib/jquery.min.js"></script>
     <script src="lib/underscore-min.js"></script>
     <script src="src/cell.js"></script>
@@ -31,7 +33,14 @@
     <script src="src/graph.js"></script>
     <script src="src/maze.js"></script>
     <script>
-        new Maze(document, 'maze').draw();
+        var maze = new Maze(document, 'maze')
+        maze.draw();
+
+        $(function() {
+            $('#solve').click(function() {
+                maze.solve();
+            });
+        });
     </script>
 </body>
 </html>

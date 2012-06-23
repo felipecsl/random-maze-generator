@@ -14,7 +14,7 @@ var MazeGenerator = function(rows, cols) {
     	recurse(randomNeighbor);
     }
     else {
-    	waitingCell = self.cellStack.pop();
+    	var waitingCell = self.cellStack.pop();
     	if(waitingCell) {
     		recurse(waitingCell);
     	}

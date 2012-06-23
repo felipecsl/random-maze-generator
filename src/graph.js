@@ -32,26 +32,31 @@ var Graph = function(width, height) {
 
   this.cellUnvisitedNeighbors = function(cell) {
   	var unvisitedNeighbors = [];
+
   	if(cell.x > 0) {
-  		leftCell = this.getCellAt(cell.x - 1, cell.y);
+  		var leftCell = this.getCellAt(cell.x - 1, cell.y);
+
   		if(leftCell && !leftCell.visited && this.areConnected(cell, leftCell)) {
   			unvisitedNeighbors.push(leftCell);
   		}
   	}
   	if(cell.y > 0) {
-  		topCell = this.getCellAt(cell.x, cell.y - 1);
+  		var topCell = this.getCellAt(cell.x, cell.y - 1);
+
   		if(topCell && !topCell.visited && this.areConnected(cell, topCell)) {
   			unvisitedNeighbors.push(topCell);
   		}
   	}
   	if(cell.x < this.width) {
-  		rightCell = this.getCellAt(cell.x + 1, cell.y);
+  		var rightCell = this.getCellAt(cell.x + 1, cell.y);
+
   		if(rightCell && !rightCell.visited && this.areConnected(cell, rightCell)) {
   			unvisitedNeighbors.push(rightCell);
   		}
   	}
   	if(cell.y < this.height) {
-  		bottomCell = this.getCellAt(cell.x, cell.y + 1);
+  		var bottomCell = this.getCellAt(cell.x, cell.y + 1);
+
   		if(bottomCell && !bottomCell.visited && this.areConnected(cell, bottomCell)) {
   			unvisitedNeighbors.push(bottomCell);
   		}

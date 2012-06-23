@@ -11,7 +11,7 @@ var Maze = function(doc, elemId) {
   
   var self = this;
 
-  self.ctx.strokeStyle = '#000';
+  self.ctx.strokeStyle = '"rgba(0,0,0,0)"';
 
   return {
     width: function() {
@@ -27,51 +27,73 @@ var Maze = function(doc, elemId) {
       this.drawMaze();
     },
 
+    solve: function() {
+
+    },
+
     drawBorders: function() {
       this.drawLine(self.cellWidth, 0, self.width, 0);
       this.drawLine(self.width, 0, self.width, self.height);
-      this.drawLine(self.width, self.height, 0, self.height);
+      this.drawLine(self.width - self.cellWidth, self.height, 0, self.height);
       this.drawLine(0, self.height, 0, 0);
     },
 
     drawMaze: function() {
       self.generator.generate();
       var graph = self.generator.graph;
+      var drawnEdges = [];
+
+      var edgeAlreadyDrawn = function(cell1, cell2) {
+        return _.detect(drawnEdges, function(edge) {
+          return _.include(edge, cell1) && _.include(edge, cell2);
+        }) != undefined;
+      };
 
       for(var i = 0; i < graph.width; i++) {
         for(var j = 0; j < graph.height; j++) {
           var cell = graph.cells[i][j];
-
-          if(graph.areConnected(cell, graph.getCellAt(cell.x, cell.y - 1))) {
+          var topCell = graph.getCellAt(cell.x, cell.y - 1);
+          var leftCell = graph.getCellAt(cell.x - 1, cell.y);
+          var rightCell = graph.getCellAt(cell.x + 1, cell.y);
+          var bottomCell = graph.getCellAt(cell.x, cell.y + 1);
+          
+          if(!edgeAlreadyDrawn(cell, topCell) && graph.areConnected(cell, topCell)) {
             var x1 = cell.x * self.cellWidth;
             var y1 = cell.y * self.cellHeight;
             var x2 = x1 + self.cellWidth;
             var y2 = y1;
             
             this.drawLine(x1, y1, x2, y2);
+            drawnEdges.push([cell, topCell]);
           }
-          if(graph.areConnected(cell, graph.getCellAt(cell.x - 1, cell.y))) {
+
+          if(!edgeAlreadyDrawn(cell, leftCell) && graph.areConnected(cell, leftCell)) {
             var x2 = x1;
             var y2 = y1 + self.cellHeight;
             
             this.drawLine(x1, y1, x2, y2);
-          }          
-          if(graph.areConnected(cell, graph.getCellAt(cell.x + 1, cell.y))) {
+            drawnEdges.push([cell, leftCell]);
+          }
+
+          if(!edgeAlreadyDrawn(cell, rightCell) && graph.areConnected(cell, rightCell)) {
             var x1 = (cell.x * self.cellWidth) + self.cellWidth;
             var y1 = cell.y * self.cellHeight;
             var x2 = x1;
             var y2 = y1 + self.cellHeight;
             
             this.drawLine(x1, y1, x2, y2);
+            drawnEdges.push([cell, rightCell]);
           }
-          if(graph.areConnected(cell, graph.getCellAt(cell.x, cell.y + 1))) {
+
+          if(!edgeAlreadyDrawn(cell, bottomCell) && graph.areConnected(cell, bottomCell)) {
             var x1 = cell.x * self.cellWidth;
             var y1 = (cell.y * self.cellHeight) + self.cellHeight;
             var x2 = x1 + self.cellWidth;
             var y2 = y1;
             
             this.drawLine(x1, y1, x2, y2);
-          }
+            drawnEdges.push([cell, bottomCell]);
+          }          
         }
       }
     },

@@ -625,3 +625,9 @@ td {
     margin: 50px auto;
     display: block;
 }
+body.index {
+    text-align: center;
+}
+#solve {
+    display: none;
+}

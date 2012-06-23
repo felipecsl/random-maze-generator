@@ -22,13 +22,17 @@ var Maze = function(doc, elemId) {
       return self.height;
     },
 
+    generate: function () {
+      self.generator.generate();
+    },
+
     draw: function() {
       this.drawBorders();
       this.drawMaze();
     },
 
     solve: function() {
-
+      self.generator.solve();
     },
 
     drawBorders: function() {
@@ -39,7 +43,6 @@ var Maze = function(doc, elemId) {
     },
 
     drawMaze: function() {
-      self.generator.generate();
       var graph = self.generator.graph;
       var drawnEdges = [];
 

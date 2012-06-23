@@ -21,7 +21,8 @@
     <!-- Mobile viewport optimized: h5bp.com/viewport -->
     <meta name="viewport" content="width=device-width">
 </head>
-<body>
+<body class='index'>
+    <p id="pleasewait">Generating maze, please wait ...</p>
     <canvas id="maze" width="600" height="600"></canvas>
 
     <input type="submit" value="Solve Maze" id="solve"></input>
@@ -33,8 +34,15 @@
     <script src="src/graph.js"></script>
     <script src="src/maze.js"></script>
     <script>
-        var maze = new Maze(document, 'maze')
-        maze.draw();
+        var maze = new Maze(document, 'maze');
+        var waitElem = $("#pleasewait");
+        
+        setTimeout(function() {
+            maze.generate();
+            maze.draw();
+            waitElem.remove();
+            $("#solve").show();
+        }, 1000);
 
         $(function() {
             $('#solve').click(function() {

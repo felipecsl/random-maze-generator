@@ -21,6 +21,19 @@ var MazeGenerator = function(rows, cols) {
     }
   };
 
+  var solve = function() {
+    var closedSet = [];
+    var startCell = this.graph.getCellAt(0, 0);
+    var openSet = [startCell];
+    var searchCell = startCell;
+
+    while(openSet.length > 0) {
+      _.each(this.graph.cellNeighbors(searchCell), function() {
+        
+      });
+    }
+  };
+
 	this.generate = function() {
 		var initialCell = this.graph.getCellAt(0, 0);
 		recurse(initialCell);

@@ -17,6 +17,15 @@ describe("Graph", function() {
     });
   });
 
+  describe('getCellDistance', function() {
+    it('should return 4', function() {
+      var cell1 = graph.getCellAt(2, 5);
+      var cell2 = graph.getCellAt(5, 9);
+      var dist = graph.getCellDistance(cell1, cell2);
+      expect(dist).toEqual(5);
+    });
+  });
+
   describe('getCellAt', function () {
     it("should return a cell", function() {
       cell = graph.getCellAt(10, 12);
@@ -52,7 +61,23 @@ describe("Graph", function() {
       graph.getCellAt(2, 3).visit();
       
       var neighbors = graph.cellUnvisitedNeighbors(graph.getCellAt(2, 2));
+      
       expect(neighbors.length).toEqual(3);
+      expect(neighbors[0]).toEqual(graph.getCellAt(2, 1));
+      expect(neighbors[1]).toEqual(graph.getCellAt(3, 2));
+      expect(neighbors[2]).toEqual(graph.getCellAt(1, 2));
+    });
+  });
+
+  describe('cellNeighbors', function() {
+    it('should return cell neighbors', function() {
+      var neighbors = graph.cellNeighbors(graph.getCellAt(2, 3));
+      
+      expect(neighbors.length).toEqual(4);
+      expect(neighbors[0]).toEqual(graph.getCellAt(2, 2));
+      expect(neighbors[1]).toEqual(graph.getCellAt(3, 3));
+      expect(neighbors[2]).toEqual(graph.getCellAt(2, 4));
+      expect(neighbors[3]).toEqual(graph.getCellAt(1, 3));
     });
   });
 

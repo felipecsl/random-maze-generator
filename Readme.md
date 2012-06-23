@@ -10,4 +10,6 @@ Please feel free to fork and make comments/suggestions! Thanks!
 
 ![maze](https://raw.github.com/felipecsl/random-maze-generator/master/maze.png)
 
+![solved maze](https://raw.github.com/felipecsl/random-maze-generator/master/solution.png)
+
 ![specs](https://raw.github.com/felipecsl/random-maze-generator/master/specs.png)

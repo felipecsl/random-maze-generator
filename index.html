@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Random Maze Generator and Solver by felipecsl</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Random Maze Generator and Solver</h1>
+        <p>Find the shortest path out of a randomly generated maze. Rendered with canvas. Fully tested with Jasmine.</p>
+
+        <p class="view"><a href="https://github.com/felipecsl/random-maze-generator">View the Project on GitHub <small>felipecsl/random-maze-generator</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/felipecsl/random-maze-generator/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/felipecsl/random-maze-generator/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/felipecsl/random-maze-generator">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>Random maze generator/solver</h1>
+
+<h2>Overview</h2>
+
+<p>This is just a simple random maze generator and solver I wrote for fun that gets drawn over a canvas on the page. It is fully written in JavaScript and tested with Jasmine.</p>
+
+<p>Please feel free to fork and make comments/suggestions! Thanks!</p>
+
+<h2>Implementation details</h2>
+
+<h3>Maze Generation</h3>
+
+<p>The maze is generated using a <a href="http://en.wikipedia.org/wiki/Graph_(data_structure">Graph</a>) structure and a recursive <a href="http://en.wikipedia.org/wiki/Depth-first_search">depht-first search algorithm</a>.
+All graph nodes (cells) are connected by default. By connected, I mean there is a wall separating them in the maze. As we run the DFS algorithm
+to generate the maze, we start removing connections and store them in an array of removed edges in the Graph class.</p>
+
+<p>The size and complexity of the maze can be configured setting different width/height for the canvas element and setting the <code>horizCells</code> and <code>vertCells</code> numbers in the Maze class.</p>
+
+<h3>Maze Solution</h3>
+
+<p>We're using the <a href="http://en.wikipedia.org/wiki/A*_search_algorithm">A * Search Algorithm</a> to find the shortest path from the start to the end of the maze. We're assuming the start cell is always the top left one, and the end is the bottom right. You can change that, however, if you like.</p>
+
+<h2>Screenshots</h2>
+
+<p><img src="https://raw.github.com/felipecsl/random-maze-generator/master/maze.png" alt="maze"></p>
+
+<p><img src="https://raw.github.com/felipecsl/random-maze-generator/master/solution.png" alt="solved maze"></p>
+
+<p><img src="https://raw.github.com/felipecsl/random-maze-generator/master/specs.png" alt="specs"></p>
+
+<h2>License</h2>
+
+<p>You are free to reuse and/or modify this code however you like. 
+If you do so, please add a note referring to this original source and attribute the credits.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/felipecsl">felipecsl</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-32887005-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>

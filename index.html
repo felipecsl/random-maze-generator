@@ -19,7 +19,7 @@
         <p>Find the shortest path out of a randomly generated maze. Rendered with canvas. Fully tested with Jasmine.</p>
 
         <p class="view"><a href="https://github.com/felipecsl/random-maze-generator">View the Project on GitHub <small>felipecsl/random-maze-generator</small></a></p>
-        <p class="view"><a href="http://felipecsl.github.com/random-maze-generator/try.html">Try it out!</a></p>
+
 
         <ul>
           <li><a href="https://github.com/felipecsl/random-maze-generator/zipball/master">Download <strong>ZIP File</strong></a></li>
@@ -28,29 +28,35 @@
         </ul>
       </header>
       <section>
-        <h1>Random maze generator/solver</h1>
+        <h1>
+<a name="random-maze-generatorsolver" class="anchor" href="#random-maze-generatorsolver"><span class="octicon octicon-link"></span></a>Random maze generator/solver</h1>
 
-<h2>Overview</h2>
+<h2>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
 
 <p>This is just a simple random maze generator and solver I wrote for fun that gets drawn over a canvas on the page. It is fully written in JavaScript and tested with Jasmine.</p>
 
 <p>Please feel free to fork and make comments/suggestions! Thanks!</p>
 
-<h2>Implementation details</h2>
+<h2>
+<a name="implementation-details" class="anchor" href="#implementation-details"><span class="octicon octicon-link"></span></a>Implementation details</h2>
 
-<h3>Maze Generation</h3>
+<h3>
+<a name="maze-generation" class="anchor" href="#maze-generation"><span class="octicon octicon-link"></span></a>Maze Generation</h3>
 
-<p>The maze is generated using a <a href="http://en.wikipedia.org/wiki/Graph_(data_structure">Graph</a>) structure and a recursive <a href="http://en.wikipedia.org/wiki/Depth-first_search">depht-first search algorithm</a>.
+<p>The maze is generated using a <a href="http://en.wikipedia.org/wiki/Graph_(data_structure)">Graph</a> structure and a recursive <a href="http://en.wikipedia.org/wiki/Depth-first_search">depht-first search algorithm</a>.
 All graph nodes (cells) are connected by default. By connected, I mean there is a wall separating them in the maze. As we run the DFS algorithm
 to generate the maze, we start removing connections and store them in an array of removed edges in the Graph class.</p>
 
 <p>The size and complexity of the maze can be configured setting different width/height for the canvas element and setting the <code>horizCells</code> and <code>vertCells</code> numbers in the Maze class.</p>
 
-<h3>Maze Solution</h3>
+<h3>
+<a name="maze-solution" class="anchor" href="#maze-solution"><span class="octicon octicon-link"></span></a>Maze Solution</h3>
 
 <p>We're using the <a href="http://en.wikipedia.org/wiki/A*_search_algorithm">A * Search Algorithm</a> to find the shortest path from the start to the end of the maze. We're assuming the start cell is always the top left one, and the end is the bottom right. You can change that, however, if you like.</p>
 
-<h2>Screenshots</h2>
+<h2>
+<a name="screenshots" class="anchor" href="#screenshots"><span class="octicon octicon-link"></span></a>Screenshots</h2>
 
 <p><img src="https://raw.github.com/felipecsl/random-maze-generator/master/maze.png" alt="maze"></p>
 
@@ -58,7 +64,8 @@ to generate the maze, we start removing connections and store them in an array o
 
 <p><img src="https://raw.github.com/felipecsl/random-maze-generator/master/specs.png" alt="specs"></p>
 
-<h2>License</h2>
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>You are free to reuse and/or modify this code however you like. 
 If you do so, please add a note referring to this original source and attribute the credits.</p>
